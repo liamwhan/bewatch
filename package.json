@@ -6,6 +6,8 @@
   "types": "types/index.d.ts",
   "scripts": {
     "build": "tsc -d --declarationDir ./types",
+    "postinstall": "npm run build",
+    "prepublish": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -27,12 +29,12 @@
   "devDependencies": {
     "@types/callsite": "^1.0.30",
     "@types/globby": "^8.0.0",
-    "@types/node": "^10.3.5",
-    "typescript": "^2.9.2"
+    "@types/node": "^10.3.5"
   },
   "dependencies": {
     "callsite": "^1.0.0",
     "colours-ts": "git+https://github.com/hammus/colours-ts.git",
-    "globby": "^8.0.1"
+    "globby": "^8.0.1",
+    "typescript": "^2.9.2"
   }
 }
