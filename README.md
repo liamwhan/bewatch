@@ -7,6 +7,7 @@ That said, it works perfectly for me so feel free to use it.
 
 
 ## Installation
+- Node.js 8.11.x recommended.
 
 ```shell
 npm i -S bewatch@git+https://github.com/hammus/bewatch.git
@@ -25,6 +26,17 @@ watcher.on("change", (file) => console.log(file, "was changed.".))
 watcher.on("add", (file) => console.log(file, "was created".))
 watcher.on("delete", (file) => console.log(file, "was deleted".))
 watcher.on("rename", (oldFilename, newFilename) => console.log(oldFilename, "was renamed to", newFilename));
+```
+
+With Options
+```javascript
+const {Bewatch} = require("bewatch");
+
+// Create a watcher
+const watcher = new Bewatch(["./folder/**/*"], {verbose: true, cwd: "C:/MyProject"});
+
+// Add some listeners
+watcher.on("change", (file) => console.log(file, "was changed.".))
 ```
 
 Or listen for everything
@@ -48,6 +60,25 @@ watcher.on("all", (event, file, newFile) =>{
 ```
 
 ## Details
+
+This was developed for Node.js 8.11.x, once 10 moves into LTS we will be able to use the `interval` option, so Bewatch will be much less useful as thats the main benefit Bewatch offers.
+
+
+### Options
+The `options` object will *accept an pass on* and options that the following dependencies use:
+- `fast-glob` - Bewatch uses `globby` for file pattern matching but `globby` uses `fast-glob` under the hood, see [Fast Glob Options](https://github.com/mrmlnc/fast-glob#options-1)
+- `fs.watch` - The options object will pass on options to `fs.watch` see [fs.Watch Options](https://nodejs.org/docs/latest-v8.x/api/fs.html#fs_fs_watch_filename_options_listener)
+
+#### Bewatch Options
+There are only 2 options that are specific to bewatch
+- `verbose` Boolean
+    - Default: `false`
+    - When enabled Bewatch will run in verbose mode
+- `lockDuration` Number
+    - Default: 1000,
+    - The interval to wait before firing the next event (without this, Node.js will send 2 events for just about everything)
+
+
 ### Instance Events
 
 #### Event `'change'`
