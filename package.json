@@ -1,0 +1,38 @@
+{
+  "name": "bewatch",
+  "version": "1.0.0",
+  "description": "Simple file watching module written in Typescript it uses Node.js fs.watch so it might not be to everyone's taste",
+  "main": "dist/index.js",
+  "types": "types/index.d.ts",
+  "scripts": {
+    "build": "tsc -d --declarationDir ./types",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hammus/bewatch.git"
+  },
+  "keywords": [
+    "node",
+    "watch",
+    "typescript",
+    "fs-watch"
+  ],
+  "author": "Liam Whan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hammus/bewatch/issues"
+  },
+  "homepage": "https://github.com/hammus/bewatch#readme",
+  "devDependencies": {
+    "@types/callsite": "^1.0.30",
+    "@types/globby": "^8.0.0",
+    "@types/node": "^10.3.5",
+    "typescript": "^2.9.2"
+  },
+  "dependencies": {
+    "callsite": "^1.0.0",
+    "colours-ts": "git+https://github.com/hammus/colours-ts.git",
+    "globby": "^8.0.1"
+  }
+}
