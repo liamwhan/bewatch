@@ -6,7 +6,6 @@
   "types": "types/index.d.ts",
   "scripts": {
     "build": "tsc -d --declarationDir ./types",
-    "postinstall": "npm run build",
     "prepublish": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
