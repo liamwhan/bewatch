@@ -27,6 +27,25 @@ watcher.on("delete", (file) => console.log(file, "was deleted".))
 watcher.on("rename", (oldFilename, newFilename) => console.log(oldFilename, "was renamed to", newFilename));
 ```
 
+Or listen for everything
+
+```javascript
+const { Bewatch } = require("bewatch");
+
+// Create a watcher
+const watcher = new Bewatch(["./folder/**/*"]);
+
+// Add some listeners
+watcher.on("all", (event, file, newFile) =>{
+    if (event === "rename") { 
+        // newFile will be undefined on any event other than "rename"
+        console.log(file, "was renamed to", newFile); 
+    } else {
+        console.log("Event:", event, "File:", file);
+    }
+})
+
+```
 
 ## Details
 ### Instance Events
@@ -63,8 +82,9 @@ Returns:
 Emitted when any event is emitted
 
 Returns:
-* `oldFilename` String - The path of the file that triggered the event *(or the old path if a `'rename'` event is emitted)*
-* `newFilename` String? - *Only emitted on `rename` events* The new path of the file
+* `event` String - The event type that was emitted.
+* `file` String - The path of the file that triggered the event *(or the old path if a `'rename'` event is emitted)*
+* `newFile` String? - *Only emitted on `rename` events* The new path of the file
 
 
 ### Implementation Info

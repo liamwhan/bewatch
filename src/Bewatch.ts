@@ -128,7 +128,7 @@ export class Bewatch extends EventEmitter {
         this.lock();
 
         this.log(`${Colours("Node.js FSEvent:", "yellow")} ${e} ${Colours("Node FSEvent File:", "yellow")} ${f}`);
-        this.emit("all", f);
+        this.emit("all", "change", f);
         this.emit("change", f);
     }
 
@@ -152,11 +152,11 @@ export class Bewatch extends EventEmitter {
             if (typeof renamedFile !== "undefined") {
                 this.log(`Old File: ${abs}`)
                 this.log(`Renamed File: ${renamedFile}`)
-                this.emit("all", abs, renamedFile);
+                this.emit("all", "rename", abs, renamedFile);
                 this.emit("rename", abs, renamedFile);
                 this.removeWatcher(abs);
             } else {
-                this.emit("all", abs);
+                this.emit("all", "delete", abs);
                 this.emit("delete", abs);
             }
             return;
@@ -165,7 +165,7 @@ export class Bewatch extends EventEmitter {
         if (!this.files.includes(abs)) {
             // Create
             this.watchers.push(this.createFileWatcher(abs));
-            this.emit("all", abs);
+            this.emit("all", "add", abs);
             this.emit("add", abs);
         }
     }
