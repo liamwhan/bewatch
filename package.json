@@ -1,6 +1,6 @@
 {
   "name": "bewatch",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Simple file watching module written in Typescript it uses Node.js fs.watch so it might not be to everyone's taste",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
