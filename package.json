@@ -1,6 +1,6 @@
 {
   "name": "bewatch",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Simple file watching module written in Typescript it uses Node.js fs.watch so it might not be to everyone's taste",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
@@ -32,7 +32,6 @@
   },
   "dependencies": {
     "callsite": "^1.0.0",
-    "colours-ts": "git+https://github.com/hammus/colours-ts.git",
     "globby": "^8.0.1",
     "typescript": "^2.9.2"
   }

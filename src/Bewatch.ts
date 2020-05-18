@@ -5,7 +5,6 @@ import { sync as glob } from "globby";
 import Callsite from "callsite";
 import { Options as FastGlobOptions } from 'fast-glob';
 import { EOL } from "os";
-import { Colours } from "colours-ts";
 
 export interface FSWatchOptions {
     encoding?: string;
@@ -99,7 +98,7 @@ export class Bewatch extends EventEmitter {
     protected log(...logargs: any[]): void {
         if (this.options.verbose) {
             // tslint:disable-next-line:no-console
-            console.log(`${Colours(`Bewatch::${Callsite()[1].getFunctionName()}`, "cyan") }`, ...logargs, EOL);
+            console.log(`Bewatch::${Callsite()[1].getFunctionName()}`, ...logargs, EOL);
         }
     }
 
@@ -127,7 +126,7 @@ export class Bewatch extends EventEmitter {
         if (this.locked || e !== "change") { return; }
         this.lock();
 
-        this.log(`${Colours("Node.js FSEvent:", "yellow")} ${e} ${Colours("Node FSEvent File:", "yellow")} ${f}`);
+        this.log(`Node.js FSEvent: ${e}`,`Node FSEvent File: ${f}`);
         this.emit("all", "change", f);
         this.emit("change", f);
     }
@@ -144,7 +143,7 @@ export class Bewatch extends EventEmitter {
         if (this.locked || e !== "rename") { return; }
         this.lock();
 
-        this.log(`${Colours("Raw FSEvent:", "yellow")} ${e}${EOL}${Colours("Raw FSEvent File:", "yellow")} ${f}${EOL}${Colours("Directory:", "yellow")} ${dir}${EOL}`);
+        this.log(`Raw FSEvent: ${e}${EOL}Raw FSEvent File: ${f}${EOL}Directory: ${dir}${EOL}`);
         const abs = path.join(dir, path.basename(f));
         if (!fs.existsSync(abs)) {
             
@@ -180,8 +179,8 @@ export class Bewatch extends EventEmitter {
 
     protected getRenamedFiles(dir: string): string {
         const files = this.getFiles(dir);
-        this.log(Colours("Files on Disk:", "yellow") + EOL + JSON.stringify(files, null, 2));
-        this.log(Colours("Watched Files:", "yellow") + EOL + JSON.stringify(this.files, null, 2));
+        this.log("Files on Disk:" + EOL + JSON.stringify(files, null, 2));
+        this.log("Watched Files:" + EOL + JSON.stringify(this.files, null, 2));
         for (const f of files) {
             if (!this.files.includes(f)) { return f; }
         }
@@ -222,11 +221,11 @@ export class Bewatch extends EventEmitter {
      * `all` - Emitted for all the above events
      */
     public Start(): this {
-        this.log("Watching Files:" + EOL + this.files.map((f) => `${Colours(f, "green")}`).join(EOL));
+        this.log("Watching Files:" + EOL + this.files.map((f) => `${f}`).join(EOL));
         for (const file of this.files) {
             this.watchers.push(this.createFileWatcher(file));
         }
-        this.log("Watching Directories:" + EOL + this.directories.map((f) => `${Colours(f, "green")}`).join(EOL));
+        this.log("Watching Directories:" + EOL + this.directories.map((f) => `${f}`).join(EOL));
         for (const dir of this.directories) {
             this.watchers.push(this.createDirWatcher(dir));
         }
