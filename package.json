@@ -27,12 +27,12 @@
   "homepage": "https://github.com/hammus/bewatch#readme",
   "devDependencies": {
     "@types/callsite": "^1.0.30",
-    "@types/globby": "^8.0.0",
+    "@types/globby": "^9.1.0",
     "@types/node": "^10.3.5"
   },
   "dependencies": {
     "callsite": "^1.0.0",
-    "globby": "^8.0.1",
+    "globby": "^13.1.4",
     "typescript": "^2.9.2"
   }
 }
